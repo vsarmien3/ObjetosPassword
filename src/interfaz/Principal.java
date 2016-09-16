@@ -4,18 +4,29 @@
  * and open the template in the editor.
  */
 package interfaz;
-
+import clases.Password;
+import javax.swing.JOptionPane;
 /**
  *
  * @author USUARIO
  */
 public class Principal extends javax.swing.JFrame {
+    
+    Password prin;
+    Password secu;
 
     /**
      * Creates new form Principal
      */
     public Principal() {
         initComponents();
+        cmdCambiar.setEnabled(false);
+        cmdGuardarNueva.setEnabled(false);
+        cmdLimpiar.setEnabled(true);
+        cmdGuardar.setEnabled(true);
+        txtContraseña.setEditable(true);
+        cmdMostrar.setEnabled(false);
+        txtNuevaContraseña.setEditable(false);
     }
 
     /**
@@ -30,19 +41,19 @@ public class Principal extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtResultado = new javax.swing.JTextArea();
         jPanel5 = new javax.swing.JPanel();
         cmdMostrar = new javax.swing.JButton();
         cmdCambiar = new javax.swing.JButton();
-        cmdBorrar = new javax.swing.JButton();
-        txtContrasena = new javax.swing.JPasswordField();
+        cmdLimpiar = new javax.swing.JButton();
+        txtContraseña = new javax.swing.JPasswordField();
         cmdGuardar = new javax.swing.JButton();
-        txtContrasenaNueva = new javax.swing.JPasswordField();
+        txtNuevaContraseña = new javax.swing.JPasswordField();
         cmdGuardarNueva = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtResultado = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -50,21 +61,8 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setText("PASSWORD");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, -1, -1));
-
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Contraseñas Guardadas"));
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        txtResultado.setEditable(false);
-        txtResultado.setColumns(20);
-        txtResultado.setRows(5);
-        jScrollPane1.setViewportView(txtResultado);
-
-        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 170, 90));
-
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 210, 140));
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Opciones"));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -85,16 +83,16 @@ public class Principal extends javax.swing.JFrame {
         });
         jPanel5.add(cmdCambiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 90, 30));
 
-        cmdBorrar.setText("Limpiar");
-        cmdBorrar.addActionListener(new java.awt.event.ActionListener() {
+        cmdLimpiar.setText("Limpiar");
+        cmdLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdBorrarActionPerformed(evt);
+                cmdLimpiarActionPerformed(evt);
             }
         });
-        jPanel5.add(cmdBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 90, 30));
+        jPanel5.add(cmdLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 90, 30));
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 160, 140, 140));
-        jPanel1.add(txtContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 170, 20));
+        jPanel1.add(txtContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 170, 20));
 
         cmdGuardar.setText("Guardar contraseña");
         cmdGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -104,12 +102,12 @@ public class Principal extends javax.swing.JFrame {
         });
         jPanel1.add(cmdGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 170, 30));
 
-        txtContrasenaNueva.addActionListener(new java.awt.event.ActionListener() {
+        txtNuevaContraseña.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtContrasenaNuevaActionPerformed(evt);
+                txtNuevaContraseñaActionPerformed(evt);
             }
         });
-        jPanel1.add(txtContrasenaNueva, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 170, 20));
+        jPanel1.add(txtNuevaContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 170, 20));
 
         cmdGuardarNueva.setText("Guardar nueva contraseña");
         cmdGuardarNueva.addActionListener(new java.awt.event.ActionListener() {
@@ -124,6 +122,18 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel3.setText("Ingrese nueva contraseña:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, -1, -1));
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Contraseña"));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtResultado.setEditable(false);
+        txtResultado.setColumns(20);
+        txtResultado.setRows(5);
+        jScrollPane1.setViewportView(txtResultado);
+
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 170, 90));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 190, 140));
 
         jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 320));
 
@@ -142,76 +152,76 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdGuardarActionPerformed
-        if (txtContrasena.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor ingrese la contraseña", "Error", JOptionPane.ERROR_MESSAGE);
-            txtContrasena.requestFocusInWindow();
-            txtContrasena.selectAll();
+        if (txtContraseña.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese su contraseña", "Error", JOptionPane.ERROR_MESSAGE);
+            txtContraseña.requestFocusInWindow();
+            txtContraseña.selectAll();
             cmdGuardar.setEnabled(true);
-        } else {
+            } else {
             String cont;
 
-            cont = txtContrasena.getText();
-            m = new Password(cont);
+            cont = txtContraseña.getText();
+            prin = new Password(cont);
 
-            JOptionPane.showMessageDialog(this, "Contraseña Guardada");
+            JOptionPane.showMessageDialog(this, "Contraseña Guardada exitosamente");
             cmdMostrar.setEnabled(true);
             cmdCambiar.setEnabled(true);
-            txtContrasena.setEditable(false);
+            txtContraseña.setEditable(false);
             cmdGuardar.setEnabled(false);
         }
 
         // TODO add your handling code here:
     }//GEN-LAST:event_cmdGuardarActionPerformed
 
-    private void txtContrasenaNuevaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContrasenaNuevaActionPerformed
+    private void txtNuevaContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNuevaContraseñaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtContrasenaNuevaActionPerformed
+    }//GEN-LAST:event_txtNuevaContraseñaActionPerformed
 
     private void cmdGuardarNuevaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdGuardarNuevaActionPerformed
-        if (txtContrasenaNueva.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor ingrese la nueva contraseña", "Error", JOptionPane.ERROR_MESSAGE);
-            txtContrasenaNueva.requestFocusInWindow();
-            txtContrasenaNueva.selectAll();
-        } else {
-            String contn;
+        if (txtNuevaContraseña.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese la nueva contraseña", "Error", JOptionPane.ERROR_MESSAGE);
+            txtNuevaContraseña.requestFocusInWindow();
+            txtNuevaContraseña.selectAll();
+            } else {
+            String conta;
 
-            contn = txtContrasenaNueva.getText();
-            p = new Password(contn);
-            p.NiveldeSeguridad();
-            JOptionPane.showMessageDialog(this, "Nueva contraseña guardada");
+            conta = txtNuevaContraseña.getText();
+            secu = new Password(conta);
+            secu.Fuerte();
+            JOptionPane.showMessageDialog(this, "Nueva contraseña guardada exitosamente");
 
             cmdMostrar.setEnabled(true);
             cmdCambiar.setEnabled(true);
-            txtContrasenaNueva.setEditable(false);
-        }
-        cmdGuardarNueva.setEnabled(true);
+            txtNuevaContraseña.setEditable(false);
+            }
+            cmdGuardarNueva.setEnabled(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_cmdGuardarNuevaActionPerformed
 
-    private void cmdBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBorrarActionPerformed
-        txtContrasena.setText("");
-        txtContrasenaNueva.setText("");
+    private void cmdLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLimpiarActionPerformed
+        txtContraseña.setText("");
+        txtNuevaContraseña.setText("");
         txtResultado.setText("");
-        txtContrasena.requestFocusInWindow();
+        txtContraseña.requestFocusInWindow();
 
         cmdGuardar.setEnabled(true);
         cmdMostrar.setEnabled(false);
         cmdCambiar.setEnabled(false);
         cmdGuardarNueva.setEnabled(false);
-        cmdBorrar.setEnabled(true);
+        cmdLimpiar.setEnabled(true);
 
-        txtContrasena.setEditable(true);
-        txtContrasenaNueva.setEditable(false);
+        txtContraseña.setEditable(true);
+        txtNuevaContraseña.setEditable(false);
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_cmdBorrarActionPerformed
+    }//GEN-LAST:event_cmdLimpiarActionPerformed
 
     private void cmdCambiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCambiarActionPerformed
-        txtContrasena.setEditable(false);
-        txtContrasenaNueva.setEditable(true);
+        txtContraseña.setEditable(false);
+        txtNuevaContraseña.setEditable(true);
         cmdGuardarNueva.setEnabled(true);
-        txtContrasenaNueva.requestFocusInWindow();
-        txtContrasenaNueva.setText("");
+        txtNuevaContraseña.requestFocusInWindow();
+        txtNuevaContraseña.setText("");
 
         JOptionPane.showMessageDialog(this, "Digite una nueva contraseña");
 
@@ -224,14 +234,12 @@ public class Principal extends javax.swing.JFrame {
 
     private void cmdMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdMostrarActionPerformed
 
-        if (txtContrasenaNueva.getText().trim().isEmpty()) {
-            txtResultado.setText("Su contraseña es: " + m.getContraseña() + "\n"
-                + m.NiveldeSeguridad());
+        if (txtNuevaContraseña.getText().trim().isEmpty()) {
+            txtResultado.setText("Su contraseña es: " + prin.getContraseña() + "\n"
+                + prin.Fuerte());
         } else {
-            txtResultado.setText("Su contraseña es: " + m.getContraseña() + "\n"
-                + m.NiveldeSeguridad() + "\n"
-                + "Su nueva contraseña es: " + p.getContraseña() + "\n"
-                + p.NiveldeSeguridad());
+            txtResultado.setText("Su nueva contraseña es: " + secu.getContraseña() + "\n"
+                    + secu.Fuerte());
         }
 
         cmdMostrar.setEnabled(false);
@@ -277,21 +285,21 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cmdBorrar;
     private javax.swing.JButton cmdCambiar;
     private javax.swing.JButton cmdGuardar;
     private javax.swing.JButton cmdGuardarNueva;
+    private javax.swing.JButton cmdLimpiar;
     private javax.swing.JButton cmdMostrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JPasswordField txtContrasena;
-    private javax.swing.JPasswordField txtContrasenaNueva;
+    private javax.swing.JPasswordField txtContraseña;
+    private javax.swing.JPasswordField txtNuevaContraseña;
     private javax.swing.JTextArea txtResultado;
     // End of variables declaration//GEN-END:variables
 }
